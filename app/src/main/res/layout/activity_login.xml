@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
 
-    android:background="#EB6B56">
+    android:background="#D14841">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,7 +17,7 @@
         android:layout_centerInParent="true"
         android:background="#D14841"
         android:padding="10dp"
-        >
+        android:id="@+id/linearLayout">
 
 
         <EditText
@@ -26,9 +26,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_top_bg"
             android:padding="10dp"
-            android:hint="Email"
-            android:textColorHint="#cccccc"
-            android:drawableLeft="@drawable/email"
+            android:hint="Id Booster"
+            android:textColorHint="#D14841"
+            android:textColor="#D14841"
+            android:drawableLeft="@drawable/user2"
             android:singleLine="true"/>
         <EditText
             android:id="@+id/etPass"
@@ -39,9 +40,10 @@
             android:layout_marginBottom="10dp"
             android:padding="10dp"
             android:hint="Password"
-            android:textColorHint="#cccccc"
+            android:textColorHint="#D14841"
+            android:textColor="#D14841"
             android:password="true"
-            android:drawableLeft="@drawable/password"
+            android:drawableLeft="@drawable/password2"
             android:singleLine="true"/>
         <Button
             android:id="@+id/btnSingIn"
@@ -50,9 +52,9 @@
             android:padding="10dp"
             android:layout_margin="0dp"
             android:text="Sign In"
+            android:textColor="#D14841"
             style="@style/DefaultButtonText"
             android:background="@drawable/button_default_bg"
             />
     </LinearLayout>
-
 </RelativeLayout>

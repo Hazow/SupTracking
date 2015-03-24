@@ -23,10 +23,10 @@ public class Login extends ActionBarActivity {
         HttpPost post = new HttpPost("http://91.121.105.200/SUPTracking/");
 
         JSONObject jsonobj = new JSONObject();
-        jsonobj.put("email", "a@b.com");
+       /* jsonobj.put("email", "a@b.com");
         jsonobj.put("old_passw", "306");
         jsonobj.put("use_id", "123");
-        jsonobj.put("new_passw", "456");
+        jsonobj.put("new_passw", "456");*/
 
         Button butSignIn = (Button) findViewById(R.id.btnSingIn);
 
