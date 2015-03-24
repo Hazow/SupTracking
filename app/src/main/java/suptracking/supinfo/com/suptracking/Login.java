@@ -1,7 +1,7 @@
 package suptracking.supinfo.com.suptracking;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +22,11 @@ public class Login extends ActionBarActivity {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost("http://91.121.105.200/SUPTracking/");
 
-        /*JSONObject jsonobj = new JSONObject();
+        JSONObject jsonobj = new JSONObject();
         jsonobj.put("email", "a@b.com");
         jsonobj.put("old_passw", "306");
         jsonobj.put("use_id", "123");
-        jsonobj.put("new_passw", "456");*/
+        jsonobj.put("new_passw", "456");
 
         Button butSignIn = (Button) findViewById(R.id.btnSingIn);
 
