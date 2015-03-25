@@ -2,15 +2,27 @@ package suptracking.supinfo.com.suptracking;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import org.apache.http.ParseException;
+import org.apache.http.util.EntityUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class Login extends ActionBarActivity {
 
@@ -23,10 +35,43 @@ public class Login extends ActionBarActivity {
         HttpPost post = new HttpPost("http://91.121.105.200/SUPTracking/");
 
         JSONObject jsonobj = new JSONObject();
-        jsonobj.put("email", "a@b.com");
-        jsonobj.put("old_passw", "306");
-        jsonobj.put("use_id", "123");
-        jsonobj.put("new_passw", "456");
+
+        try {
+            jsonobj.put("action", "login");
+            jsonobj.put("login", "admin");
+            jsonobj.put("password", "admin");
+
+            DefaultHttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppostreq = new HttpPost("http://91.121.105.200/SUPTracking/");
+
+            StringEntity se = new StringEntity(jsonobj.toString());
+
+            HttpResponse httpresponse = httpclient.execute(httppostreq);
+
+            String responseText = null;
+            try {
+                responseText = EntityUtils.toString(httpresponse.getEntity());
+            }catch (ParseException e) {
+                e.printStackTrace();
+                Log.i("Parse Exception", e + "");
+
+
+            }
+
+            JSONObject json = new JSONObject(responseText);
+
+            Toast.makeText(this, json.toString(), Toast.LENGTH_LONG).show();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         Button butSignIn = (Button) findViewById(R.id.btnSingIn);
 
