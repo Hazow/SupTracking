@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_top_bg"
             android:padding="10dp"
-            android:hint="Id Booster"
+            android:hint="Your login"
             android:textColorHint="#D14841"
             android:textColor="#383838"
             android:drawableLeft="@drawable/user"
@@ -50,7 +50,7 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
-            android:hint="Password"
+            android:hint="Your password"
             android:textColorHint="#D14841"
             android:textColor="#383838"
             android:password="true"
@@ -80,7 +80,7 @@
 
 
     <ImageView
-        android:id="@+id/imageViewGameOver"
+        android:id="@+id/car_footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/car_footer"
