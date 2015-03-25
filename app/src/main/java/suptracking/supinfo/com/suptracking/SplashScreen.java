@@ -1,16 +1,12 @@
 package suptracking.supinfo.com.suptracking;
 
+import android.hardware.SensorManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 
 public class SplashScreen extends Activity {
 
