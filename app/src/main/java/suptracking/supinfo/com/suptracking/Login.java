@@ -1,5 +1,11 @@
 package suptracking.supinfo.com.suptracking;
 
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -45,6 +51,7 @@ public class Login extends ActionBarActivity {
         final EditText editName = (EditText) findViewById(R.id.etUserName);
         final EditText editPass = (EditText) findViewById(R.id.etPass);
         final ImageView car_footer = (ImageView) findViewById(R.id.car_footer);
+
 
         butSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
