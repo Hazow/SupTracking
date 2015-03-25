@@ -6,8 +6,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.supinfo.suptracking.request.ProtocoleHTTPTask;
@@ -38,13 +41,10 @@ public class Login extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
-
-
         Button butSignIn = (Button) findViewById(R.id.btnSingIn);
         final EditText editName = (EditText) findViewById(R.id.etUserName);
         final EditText editPass = (EditText) findViewById(R.id.etPass);
+        final ImageView car_footer = (ImageView) findViewById(R.id.car_footer);
 
         butSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +53,18 @@ public class Login extends ActionBarActivity {
             }
         });
 
+        car_footer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TranslateAnimation animation = new TranslateAnimation(0.0f, 600.0f,0.0f, 0.0f);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
+                animation.setDuration(1200);  // animation duration
+                animation.setRepeatCount(1);  // animation repeat count
+                animation.setRepeatMode(2);   // repeat animation (left to right, right to left )
+                //animation.setFillAfter(true);
+                car_footer.startAnimation(animation);
+            }
+        });
     }
-
 
 
     @Override
