@@ -7,19 +7,30 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
+    android:background="#d14841">
 
-    android:background="#D14841">
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="#D14841"
         android:padding="10dp"
         android:id="@+id/linearLayout">
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Check the position of the vehicle in real time with this tool"
+            android:gravity="center"
+            android:id="@+id/textView2"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/imageView"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_marginBottom="55dp"/>
         <EditText
             android:id="@+id/etUserName"
             android:layout_width="match_parent"
@@ -28,22 +39,22 @@
             android:padding="10dp"
             android:hint="Id Booster"
             android:textColorHint="#D14841"
-            android:textColor="#D14841"
-            android:drawableLeft="@drawable/user2"
+            android:textColor="#383838"
+            android:drawableLeft="@drawable/user"
             android:singleLine="true"/>
         <EditText
             android:id="@+id/etPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_bottom_bg"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
             android:hint="Password"
             android:textColorHint="#D14841"
-            android:textColor="#D14841"
+            android:textColor="#383838"
             android:password="true"
-            android:drawableLeft="@drawable/password2"
+            android:drawableLeft="@drawable/password"
             android:singleLine="true"/>
         <Button
             android:id="@+id/btnSingIn"
@@ -52,9 +63,39 @@
             android:padding="10dp"
             android:layout_margin="0dp"
             android:text="Sign In"
-            android:textColor="#D14841"
+            android:textColor="#383838"
             style="@style/DefaultButtonText"
             android:background="@drawable/button_default_bg"
             />
     </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <ImageView
+        android:id="@+id/imageViewGameOver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/car_footer"
+        android:layout_above="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="© SupTracking 2015"
+        android:textColor="#ffffff"
+        android:id="@+id/textView3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>
