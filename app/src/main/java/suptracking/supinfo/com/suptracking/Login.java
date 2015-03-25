@@ -7,9 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.supinfo.suptracking.request.ProtocoleHTTPTask;
+
+import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -23,6 +28,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Login extends ActionBarActivity {
 
@@ -31,61 +38,18 @@ public class Login extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://91.121.105.200/SUPTracking/");
-
-        JSONObject jsonobj = new JSONObject();
-<<<<<<< HEAD
-
-        try {
-            jsonobj.put("action", "login");
-            jsonobj.put("login", "admin");
-            jsonobj.put("password", "admin");
-
-            DefaultHttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppostreq = new HttpPost("http://91.121.105.200/SUPTracking/");
-
-            StringEntity se = new StringEntity(jsonobj.toString());
-
-            HttpResponse httpresponse = httpclient.execute(httppostreq);
-
-            String responseText = null;
-            try {
-                responseText = EntityUtils.toString(httpresponse.getEntity());
-            }catch (ParseException e) {
-                e.printStackTrace();
-                Log.i("Parse Exception", e + "");
 
 
-            }
 
-            JSONObject json = new JSONObject(responseText);
-
-            Toast.makeText(this, json.toString(), Toast.LENGTH_LONG).show();
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-=======
-       /* jsonobj.put("email", "a@b.com");
-        jsonobj.put("old_passw", "306");
-        jsonobj.put("use_id", "123");
-        jsonobj.put("new_passw", "456");*/
->>>>>>> origin/master
 
         Button butSignIn = (Button) findViewById(R.id.btnSingIn);
+        final EditText editName = (EditText) findViewById(R.id.etUserName);
+        final EditText editPass = (EditText) findViewById(R.id.etPass);
 
         butSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Login(editName.getText().toString(),editPass.getText().toString());
             }
         });
 
@@ -113,5 +77,16 @@ public class Login extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void Login(String login,String password){// On ajoute nos données dans une liste
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        // On ajoute nos valeurs ici un identifiant et un message
+        nameValuePairs.add(new BasicNameValuePair("action", "login"));
+        nameValuePairs.add(new BasicNameValuePair("login", login));
+        nameValuePairs.add(new BasicNameValuePair("password", password));
+
+        new ProtocoleHTTPTask(this).execute(nameValuePairs);
     }
 }

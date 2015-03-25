@@ -20,5 +20,6 @@
     </style>
 
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_connected">Connected</string>
 
 </resources>
