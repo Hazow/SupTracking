@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/map"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="com.google.android.gms.maps.MapFragment"/>
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+
+        <TextView
+            android:id="@+id/txtViewDist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0m"
+            android:textSize="35dp"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/txtViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distance voiture : "
+            android:textSize="25dp"/>
+
+    </RelativeLayout>
+
+
+
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:name="com.google.android.gms.maps.MapFragment"/>
+
+</RelativeLayout>
