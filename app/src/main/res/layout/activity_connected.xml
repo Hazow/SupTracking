@@ -6,35 +6,72 @@
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
+        android:background="#d14841"
         >
+
+        <ImageView
+            android:layout_width="210dp"
+            android:layout_height="80dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/logo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/txtViewDist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0m"
-            android:textSize="35dp"
-            android:layout_alignParentRight="true"/>
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:paddingRight="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_alignRight="@+id/imageView2"
+            android:layout_alignEnd="@+id/imageView2" />
 
-        <TextView
-            android:id="@+id/txtViewLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Distance voiture : "
-            android:textSize="25dp"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:id="@+id/imageView2"
+            android:src="@drawable/marker"
+            android:layout_marginRight="11dp"
+            android:layout_marginEnd="11dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
-
-
-
-
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:name="com.google.android.gms.maps.MapFragment"/>
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_below="@+id/rl1"
+        android:layout_above="@+id/footer" />
+
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#d14841"
+        android:gravity="center" >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:id="@+id/car_footer"
+            android:src="@drawable/car_footer"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="344dp"
+            android:layout_marginEnd="344dp" />
+       </RelativeLayout>
 
 </RelativeLayout>

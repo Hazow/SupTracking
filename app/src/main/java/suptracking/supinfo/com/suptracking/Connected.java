@@ -14,8 +14,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,10 +60,18 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
 
         txtv = (TextView) findViewById(R.id.txtViewDist);
         rl1 = (RelativeLayout) findViewById(R.id.rl1);
+        final ImageView car_footer = (ImageView) findViewById(R.id.car_footer);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        TranslateAnimation animation = new TranslateAnimation(-100.0f, 1100.0f,0.0f, 0.0f);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
+        animation.setDuration(5200);  // animation duration
+        animation.setRepeatCount(Animation.INFINITE); // animation repeat count
+        animation.setRepeatMode(1);   // repeat animation (left to right, right to left )
+        //animation.setFillAfter(true);
+        car_footer.startAnimation(animation);
 
     }
 
@@ -147,7 +159,7 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
         Location l=getCarPosition();
         car=map.addMarker(new MarkerOptions()
                 .position(new LatLng(l.getLatitude(),l.getLongitude()))
-                .title("Voiture"));
+                .title("Vehicle"));
 
         Timer t = new Timer();
 
@@ -166,7 +178,7 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
                         Location l=getCarPosition();
                         car = map.addMarker(new MarkerOptions()
                                 .position(new LatLng(l.getLatitude(),l.getLongitude()))
-                                .title("Voiture"));
+                                .title("Vehicle"));
 
                         double distance = myPos.distanceTo(l);
                         distance=Math.round(distance);
@@ -196,9 +208,9 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
                         public void run()
                         {
                             if ( (i % 2) == 0) {
-                                rl1.setBackgroundColor(Color.RED);
+                                //rl1.setBackgroundColor(Color.RED);
                             } else {
-                                rl1.setBackgroundColor(Color.YELLOW);
+                                //rl1.setBackgroundColor(Color.YELLOW);
                             }
                             i++;
                         }
@@ -209,7 +221,7 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
 
             notifyUser();
         }
-        Toast.makeText(this, "ALERT : On vole votre voiture !!! Distance="+distance+"m", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "ALERT : Someone steal your vehicle ! \n Distance : "+distance+"m", Toast.LENGTH_SHORT).show();
     }
 
     public void notifyUser(){
@@ -225,7 +237,7 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
         Notification notification = new Notification(R.drawable.ic_launcher, "SupTracking", System.currentTimeMillis());
         notification.flags = Notification.FLAG_AUTO_CANCEL | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND;
 
-        notification.setLatestEventInfo(this, "Votre voiture a un comportement étrange", "Votre voiture se fait peut-être voler !!!", contentIntent);
+        notification.setLatestEventInfo(this, "SupTracking", " Someone steal your vehicle !", contentIntent);
         //10 is a random number I chose to act as the id for this notification
         notificationManager.notify(10, notification);
 
