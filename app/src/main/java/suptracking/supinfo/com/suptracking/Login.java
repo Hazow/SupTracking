@@ -19,7 +19,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.supinfo.suptracking.model.User;
 import com.supinfo.suptracking.request.ProtocoleHTTPTask;
+import com.supinfo.suptracking.sqlite.DAO;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
@@ -42,6 +44,8 @@ import java.util.List;
 
 public class Login extends ActionBarActivity {
 
+    private DAO dao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +55,7 @@ public class Login extends ActionBarActivity {
         final EditText editName = (EditText) findViewById(R.id.etUserName);
         final EditText editPass = (EditText) findViewById(R.id.etPass);
         final ImageView car_footer = (ImageView) findViewById(R.id.car_footer);
-
+        dao = new DAO(this);
 
         butSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,30 +75,16 @@ public class Login extends ActionBarActivity {
                 car_footer.startAnimation(animation);
             }
         });
-    }
 
+        if(dao.checkTableIsEmpty()){
+            User user = dao.getLastUser();
+            editName.setText(user.getUsername());
+            editPass.setText(user.getPassword());
+        }else{
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
 
     private void Login(String login,String password){// On ajoute nos données dans une liste
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();

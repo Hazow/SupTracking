@@ -1,10 +1,15 @@
 package com.supinfo.suptracking.request;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.supinfo.suptracking.model.User;
+import com.supinfo.suptracking.sqlite.DAO;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -16,6 +21,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +39,9 @@ import suptracking.supinfo.com.suptracking.SplashScreen;
  */
 public class ProtocoleHTTPTask extends AsyncTask<List<NameValuePair>, Void, String>
 {
+    private DAO dao;
     private Context mContext;
+
     public ProtocoleHTTPTask (Context context){
         mContext = context;
     }
@@ -98,14 +106,50 @@ public class ProtocoleHTTPTask extends AsyncTask<List<NameValuePair>, Void, Stri
             String val= String.valueOf(json.get("success"));
 
             if(val=="true") {
-                Log.e("Login : ******** ", "Bad login !");
-                Toast.makeText(mContext,"Utilisateur identifié !",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(mContext, Connected.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(i);
-            }else{
                 Log.e("Login : ******** ", "Good logins !");
-                Toast.makeText(mContext,"Utilisateur incorrect !",Toast.LENGTH_SHORT).show();
+
+                JSONObject uniObject = json.getJSONObject("user");
+                final String username = String.valueOf(uniObject.get("username"));
+                final String password = String.valueOf(uniObject.get("password"));
+                dao = new DAO(mContext);
+                final User user = new User(username,password);
+
+                if(dao.checkIfExist(user.getUsername(),user.getPassword())){
+                    Intent i = new Intent(mContext, Connected.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(i);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+                    builder.setTitle("Suptracking");
+                    builder.setMessage("Do you want to save your password ?");
+
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            dao.insertUser(user);
+                            Intent i = new Intent(mContext, Connected.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(i);
+                          }
+                    });
+
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Intent i = new Intent(mContext, Connected.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(i);
+                        }
+                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+
+            }else{
+                Log.e("Login : ******** ", "Bad login !");
+                Toast.makeText(mContext,"Invalid login",Toast.LENGTH_SHORT).show();
             }
 
         } catch (JSONException e) {

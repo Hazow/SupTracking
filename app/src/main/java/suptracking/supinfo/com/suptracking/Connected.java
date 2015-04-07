@@ -76,29 +76,6 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
     }
 
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_connected, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void onMapReady(final GoogleMap map) {
 
@@ -257,5 +234,13 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
         }
         incr++;
         return locCar;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Connected.this, Login.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(i);
+        finish();
     }
 }
