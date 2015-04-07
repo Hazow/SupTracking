@@ -52,6 +52,8 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
     int i=0;
     TextView txtv;
     RelativeLayout rl1;
+    Timer t;
+    Timer t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,18 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
 
     }
 
+    @Override
+    protected void onDestroy() {
+        if(t!=null){
+            t.cancel();
+            t.purge();
+        }
+        if(t1!=null){
+            t1.cancel();
+            t1.purge();
+        }
+        super.onDestroy();
+    }
 
     @Override
     public void onMapReady(final GoogleMap map) {
@@ -138,7 +152,7 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
                 .position(new LatLng(l.getLatitude(),l.getLongitude()))
                 .title("Vehicle"));
 
-        Timer t = new Timer();
+        t = new Timer();
 
         t.scheduleAtFixedRate( new TimerTask() {
             @Override
@@ -175,9 +189,9 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
 
     private void carOutLimit(double distance, final RelativeLayout rl1){
         if(i==0){
-            Timer t = new Timer();
+           t1 = new Timer();
 
-            t.scheduleAtFixedRate( new TimerTask() {
+            t1.scheduleAtFixedRate( new TimerTask() {
                 @Override
                 public void run() {
                     runOnUiThread(new Runnable()
@@ -238,6 +252,15 @@ public class Connected extends FragmentActivity implements OnMapReadyCallback{
 
     @Override
     public void onBackPressed() {
+        if(t!=null){
+            t.cancel();
+            t.purge();
+        }
+        if(t1!=null){
+            t1.cancel();
+            t1.purge();
+        }
+        //Log.e("Timer : ",t.toString());
         Intent i = new Intent(Connected.this, Login.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(i);
